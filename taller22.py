@@ -6,42 +6,41 @@ import numpy as np
 # Entradas: void.
 # Salida: Un diccionario con las funciones de pertenencia.
 def funcionesPertenencia():
-    # Arreglo para los valores
-    x = np.arange(0, 11)
+    x = np.arange(0, 11) # Arreglo para los valores
     # Diccionario que almacena las funciones de pertenencia, las posiciones representan baja, media y alta
     funcPertenencia = dict(frecuencia_estornudos = [0,0,0], grado_congestion = [0,0,0], tos = [0,0,0], numero_familiares = [0,0,0], edad=[0,0,0], Baja=0, Media=0, Alta=0)
     # Cantidad de integrantes
-    # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche baja, se considera el rango de valores de 1 a 4
+    # Función de pertenencia trapezoidal para la frecuencia de estornudos baja, se considera el rango de valores de 1 a 4
     funcPertenencia['frecuencia_estornudos'][0] = fuzz.trapmf(x, [0, 0, 1, 4])
-    # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche media, se considera el rango de valores de 2 a 7
+    # Función de pertenencia trapezoidal para la frecuencia de estornudos media, se considera el rango de valores de 2 a 7
     funcPertenencia['frecuencia_estornudos'][1] = fuzz.trimf(x, [2, 4, 6])
-    # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche alta, se considera el rango de valores de 5 a 10
+    #Función de pertenencia trapezoidal para la frecuencia de estornudos alta, se considera el rango de valores de 5 a 10
     funcPertenencia['frecuencia_estornudos'][2] = fuzz.trapmf(x, [5, 6, 10, 10])
 
-        # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche baja, se considera el rango de valores de 1 a 4
+    # Función de pertenencia trapezoidal para la el grado de congestión bajo, se considera el rango de valores de 1 a 4
     funcPertenencia['grado_congestion'][0] = fuzz.trapmf(x, [0, 0, 1, 3])
-    # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche media, se considera el rango de valores de 2 a 7
+    # Función de pertenencia trapezoidal para la el grado de congestión medio, se considera el rango de valores de 2 a 4
     funcPertenencia['grado_congestion'][1] = fuzz.trimf(x, [1, 2, 4])
-    # Función de pertenencia trapezoidal para la cantidad de Intolerancia_leche alta, se considera el rango de valores de 5 a 10
+    # Función de pertenencia trapezoidal para la el grado de congestión alto, se considera el rango de valores de 3 a 10
     funcPertenencia['grado_congestion'][2] = fuzz.trapmf(x, [3, 4, 10, 10])
 
-    # Función de pertenencia trapezoidal para la presencia de sonidos mezclados baja, se considera el rango de valores de 1 a 4
+    # Función de pertenencia trapezoidal para la el grado de tos baja, se considera el rango de valores de 1 a 4
     funcPertenencia['tos'][0] = fuzz.trimf(x, [0, 0, 2])
-    # Función de perttosdal para la presencia de sonidos mezclados media, se considera el rango de valores de 2 a 7
+    # Función de pertenencia trapezoidal para la el grado de tos media, se considera el rango de valores de 2 a 7
     funcPertenencia['tos'][1] = fuzz.trapmf(x, [1, 3, 4, 5])
-    # Función de perttosdal para la presencia de sonidos mezclados alta, se considera el rango de valores de 5 a 10
+    # Función de pertenencia trapezoidal para la el grado de tos alta, se considera el rango de valores de 5 a 10
     funcPertenencia['tos'][2] = fuzz.trapmf(x, [4, 6, 10, 10])
 
     # Función de pertenencia trapezoidal para la presencia de sonidos mezclados baja, se considera el rango de valores de 1 a 4
-    funcPertenencia['numero_familiares'][0] = fuzz.trimf(x,  [0, 1, 3]) # Triangulo: Integrantes menores a 4
-    funcPertenencia['numero_familiares'][1] = fuzz.trapmf(x, [2, 3, 4, 6]) # Trapecio: Integrantes de 4 a 6
-    funcPertenencia['numero_familiares'][2] = fuzz.trapmf(x, [4, 6, 10, 10])  # Trapecio: Integrantes desde 7 en adelante
+    funcPertenencia['numero_familiares'][0] = fuzz.trimf(x,  [0, 1, 3]) # Triangulo: Número de familiares menores a 4
+    funcPertenencia['numero_familiares'][1] = fuzz.trapmf(x, [2, 3, 4, 6]) # Trapecio: Número de familiares de 4 a 6
+    funcPertenencia['numero_familiares'][2] = fuzz.trapmf(x, [4, 6, 10, 10])  # Trapecio: Número de familiares de 7 a 10
 
-    # Función de pertenencia trapezoidal para la presencia de sonidos mezclados baja, se considera el rango de valores de 1 a 4
+    # Función de pertenencia trapezoidal para la edad infante, se considera el rango de valores de 1 a 4
     funcPertenencia['edad'][0] = fuzz.trimf(x, [0, 0, 2])
-    # Función de pertenencia trapezoidal para la presencia de sonidos mezclados media, se considera el rango de valores de 2 a 7
+    # Función de pertenencia trapezoidal para la edad joven, se considera el rango de valores de 2 a 7
     funcPertenencia['edad'][1] = fuzz.trapmf(x, [1, 2, 3, 4])
-    # Función de pertenencia trapezoidal para la presencia de sonidos mezclados alta, se considera el rango de valores de 5 a 10
+    # Función de pertenencia trapezoidal para la edad adulta, se considera el rango de valores de 5 a 10
     funcPertenencia['edad'][2] = fuzz.trapmf(x, [3, 4, 10, 10])
 
     funcPertenencia['Baja'] = fuzz.trapmf(x, [1, 1, 2, 3])
@@ -60,26 +59,27 @@ def fusificarEntrada(funcPertenencia, entradaUsuario):
     fusificacion = dict(frecuencia_estornudos=[0,0,0], grado_congestion=[0,0,0], tos=[0,0,0], numero_familiares=[0,0,0], edad=[0,0,0])
     
     # Fusifica valores con entradas
-    # Cantidad de integrantes
+    # Frecuencia de estornudos
     fusificacion['frecuencia_estornudos'][0] = fuzz.interp_membership(x, funcPertenencia['frecuencia_estornudos'][0], entradaUsuario[0])
     fusificacion['frecuencia_estornudos'][1] = fuzz.interp_membership(x, funcPertenencia['frecuencia_estornudos'][1], entradaUsuario[0])
     fusificacion['frecuencia_estornudos'][2] = fuzz.interp_membership(x, funcPertenencia['frecuencia_estornudos'][2], entradaUsuario[0])
 
+    # Grado de congestión
     fusificacion['grado_congestion'][0] = fuzz.interp_membership(x, funcPertenencia['grado_congestion'][0], entradaUsuario[1])
     fusificacion['grado_congestion'][1] = fuzz.interp_membership(x, funcPertenencia['grado_congestion'][1], entradaUsuario[1])
     fusificacion['grado_congestion'][2] = fuzz.interp_membership(x, funcPertenencia['grado_congestion'][2], entradaUsuario[1])
 
-    # Presencia de sonidos mezclados
+    # Frecuencia de tos
     fusificacion['tos'][0] = fuzz.interp_membership(x, funcPertenencia['tos'][0], entradaUsuario[2])
     fusificacion['tos'][1] = fuzz.interp_membership(x, funcPertenencia['tos'][1], entradaUsuario[2])
     fusificacion['tos'][2] = fuzz.interp_membership(x, funcPertenencia['tos'][2], entradaUsuario[2])
     
-    # Presencia de sonidos mezclados
+    # Número de familiares con síntomas o sospechas de alergia
     fusificacion['numero_familiares'][0] = fuzz.interp_membership(x, funcPertenencia['numero_familiares'][0], entradaUsuario[3])
     fusificacion['numero_familiares'][1] = fuzz.interp_membership(x, funcPertenencia['numero_familiares'][1], entradaUsuario[3])
     fusificacion['numero_familiares'][2] = fuzz.interp_membership(x, funcPertenencia['numero_familiares'][2], entradaUsuario[3])
 
-    # Presencia de sonidos mezclados
+    # Edad del paciente
     fusificacion['edad'][0] = fuzz.interp_membership(x, funcPertenencia['edad'][0], entradaUsuario[4])
     fusificacion['edad'][1] = fuzz.interp_membership(x, funcPertenencia['edad'][1], entradaUsuario[4])
     fusificacion['edad'][2] = fuzz.interp_membership(x, funcPertenencia['edad'][2], entradaUsuario[4])
@@ -91,7 +91,7 @@ def fusificarEntrada(funcPertenencia, entradaUsuario):
 # Salida: int
 def reglas(fusificacion):
     # Reglas:
-    # Si la edad es 0 o 1 (nino o joven) y tiene alta congestion y altos estornudos, alergia alta
+    # Si la edad es 0 o 1 (niño o joven) y tiene alta congestion y altos estornudos, alergia alta
     regla1 = np.fmin(np.fmax(fusificacion['edad'][0], fusificacion['edad'][1]), np.fmin(fusificacion['grado_congestion'][2], fusificacion['frecuencia_estornudos'][2]))
     corte1 = np.fmin(regla1, funcPertenencia['Alta'])
     # Si la edad es 2 (adulto) y tiene baja o media congestion y baja o media de estornudos, alergia media
@@ -109,9 +109,6 @@ def reglas(fusificacion):
     # Si la edad es 2 (adulto) y tiene baja tos y baja congestion o baja tos y baja frecuencia de estornudos o baja congestion y baja frecuencia de estornudos, alergia baja
     regla6 = np.fmin(fusificacion['edad'][2], np.fmax(np.fmax(np.fmin(fusificacion['tos'][0], fusificacion['grado_congestion'][0]), np.fmin(fusificacion['tos'][0], fusificacion['frecuencia_estornudos'][0])), np.fmin(fusificacion['grado_congestion'][0], fusificacion['frecuencia_estornudos'][0])))
     corte6 = np.fmin(regla6, funcPertenencia['Baja'])
-
-
-
     resultado = np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(corte1,corte2), corte3), corte4) , corte5) , corte6) 
     print("Resultado: ", resultado)
     return resultado
@@ -127,35 +124,35 @@ def graficar(funcPertenencia):
     fig = plt.figure()
     fig.clf()
     ax = fig.subplots(2,3)
-    # Cantidad de integrantes
+    # Frecuencia de estornudos
     ax[0,0].set_title("Frecuencia diaria de estornudos")
     ax[0,0].plot(x,funcPertenencia['frecuencia_estornudos'][0],'r',label ='Baja')
     ax[0,0].plot(x,funcPertenencia['frecuencia_estornudos'][1],'g',label='Media')
     ax[0,0].plot(x,funcPertenencia['frecuencia_estornudos'][2],'b',label='Alta')
     ax[0,0].legend()
     ax[0,0].grid()
-    # Sonidos Mezclados
+    # Grado de congestión nasal
     ax[0,1].set_title("Grado congestión de nasal")
     ax[0,1].plot(x,funcPertenencia['grado_congestion'][0],'r',label ='Baja')
     ax[0,1].plot(x,funcPertenencia['grado_congestion'][1],'g',label='Media')
     ax[0,1].plot(x,funcPertenencia['grado_congestion'][2],'b',label='Alta')
     ax[0,1].legend()
     ax[0,1].grid()
-    # Presencia instrumental
+    # Frecuencia de tos
     ax[0,2].set_title("Frecuencia diaria de tos")
     ax[0,2].plot(x,funcPertenencia['tos'][0],'r',label ='Baja')
     ax[0,2].plot(x,funcPertenencia['tos'][1],'g',label='Media')
     ax[0,2].plot(x,funcPertenencia['tos'][2],'b',label='Alta')
     ax[0,2].legend()
     ax[0,2].grid()
-    # Presencia instrumental
+    # Número de familiares con síntomas o sospechas de alergia
     ax[1,0].set_title("Numero de famliares con alergia al polen")
     ax[1,0].plot(x,funcPertenencia['numero_familiares'][0],'r',label ='Baja')
     ax[1,0].plot(x,funcPertenencia['numero_familiares'][1],'g',label='Media')
     ax[1,0].plot(x,funcPertenencia['numero_familiares'][2],'b',label='Alta')
     ax[1,0].legend()
     ax[1,0].grid()
-    # Presencia instrumental
+    # Edad del paciente
     ax[1,1].set_title("Edad del paciente")
     ax[1,1].plot(x,funcPertenencia['edad'][0],'r',label ='Baja')
     ax[1,1].plot(x,funcPertenencia['edad'][1],'g',label='Media')

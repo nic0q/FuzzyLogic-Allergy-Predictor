@@ -14,19 +14,19 @@ def evaluacion():
         grado_congestion = int(values['-grado_congestion-'])
         tos = int(values['-tos-'])
         numero_familiares = int(values['-numero_familiares-'])
-        edad = int(values['-edad-'])
-    return [frecuencia_estornudos, grado_congestion, tos, numero_familiares, edad]
+        edad = values['-edad-']
+        if(edad == ''):
+            edad = 0
+    return [frecuencia_estornudos, grado_congestion, tos, numero_familiares, int(int(edad)/10)]
 
 #Descripción:Imprime los resultados
 #Entrada: void
 #Salida: void
-
 def imprimir_resultados():
     while True:
         event, values = window_resultados.read()
         if event == 'Cerrar' or event == sg.WIN_CLOSED:
             break
-    
 
 while(True):
     sg.ChangeLookAndFeel('DarkTanBlue')
@@ -45,15 +45,14 @@ while(True):
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-tos-')
         ],
-        [   sg.T('Número de Familiares', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('Número de Familiares que tienen alergia', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-numero_familiares-')
         ],
         [   sg.T('¿Cual es tu rango de edad?', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
-            sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-edad-')
+            sg.InputText(key = "-edad-", enable_events=True, size=(30, 10),  font=("Comic Sans MS", 11)),
         ],
-
         [sg.Button('Enviar'), sg.Button('Cerrar')]
     ]
     window = sg.Window('Diagnóstico de grado alergia al polen', layout, default_element_size=(40, 1), grab_anywhere=False)
@@ -61,7 +60,6 @@ while(True):
     event, values = window.read()
     if event == 'Cerrar' or event == sg.WIN_CLOSED:
         break
-
     entrada = evaluacion()
     window.close()
     resultados = run(entrada)
@@ -77,8 +75,6 @@ while(True):
             [sg.Column([[sg.Text('Resultados', justification='center', font=("Comic Sans MS", 25))]], justification='center')],
             [sg.T(resultados, justification='left', font=('Comic Sans MS', 15))], 
             [sg.Button('Cerrar')]]
-
-
     window_resultados = sg.Window('Diagnóstico de grado de alergia al polen', layout_resultados, default_element_size=(40, 1), grab_anywhere=False)
     imprimir_resultados()
     event, values = window_resultados.read()
