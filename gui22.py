@@ -33,23 +33,23 @@ while(True):
     title = sg.Text('¿Qué grado de alergia al polen tengo?', justification='center', font=("Comic Sans MS", 25))
     layout = [
         [sg.Column([[title]], justification='center')],
-        [   sg.T('Con que frecuencia frecuencia estornudas diariamente', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('¿Con que frecuencia frecuencia estornudas en día de primavera o polen elevado?', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-frecuencia_estornudos-')
         ],
-        [   sg.T('Que grado de congestión tienes regularmente cuando sales a la calle?', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('¿Qué grado de congestión tienes regularmente cuando sales a la calle en día de primavera o polen elevado?', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-grado_congestion-')
         ],
-        [   sg.T('Con que frecuencia frecuencia toses diariamente', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('Con que frecuencia frecuencia toses diariamente en día de primavera o polen elevado', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-tos-')
         ],
-        [   sg.T('Número de Familiares que tienen alergia', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('¿Cuántos familiares tienen sospecha de alergia al polen?', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.Slider(range=(0, 10), enable_events=True, default_value=0, size=(30, 10), orientation='h', font=('Comic Sans MS', 11), key='-numero_familiares-')
         ],
-        [   sg.T('¿Cual es tu rango de edad?', justification='left', font=('Comic Sans MS', 15)), 
+        [   sg.T('¿Cuál es su edad?', justification='left', font=('Comic Sans MS', 15)), 
             sg.Push(),
             sg.InputText(key = "-edad-", enable_events=True, size=(30, 10),  font=("Comic Sans MS", 11)),
         ],
